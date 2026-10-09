@@ -16,7 +16,8 @@
 
  int main(void){
    printf("Welcome to minimat!\n");
-   printf("Type \"quit\" to quit program\n");
+   printf("Type \"help\" for a list of valid commands.\n");
+   printf("Type \"quit\" to quit program.\n");
 
 
    int exitCode = 0;

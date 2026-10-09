@@ -52,6 +52,27 @@
     if(!strcmp(token1, "quit")){
         printf("Quitting program...\n");
         return -1;
+    } else if (!strcmp(token1, "help")){
+        printf("\nHelp Menu:\n");
+        printf("Accepted commands: \n");
+        printf("\"help\" - Opens menu that describes commands.\n");
+        printf("\"quit\" - Exits the minimat program.\n");
+        printf("\"clear\" - Clears all saved vectors from memory.\n");
+        printf("\"list\" - Prints a list of all saved vectors to the console.\n\n");
+
+        printf("\"a = x y z\" - Assigns x, y, and z values to a vector \"a\" (z may be left blank if 0).\n");
+        printf("              Overwrites previous save of same name.\n");
+        printf("              Will only save if space allows.\n\n");
+
+        printf("\"a\" - Displays current values stored in a.\n");
+        printf("\"a + b\" - Adds vectors a and b and displays result (no storage).\n");
+        printf("\"a * b\" - Performs and reports the dot product of vectors a and b.\n");
+        printf("\"a x b\" - Performs and reports the cross product of vectors a and b.\n\n");
+        
+        printf("\"c = a +/- b\" - Adds/Subtracts two vectors, a and b, and stores the result in c, displays result.\n");
+        printf("\"a = b * n\" or \"a = n * b\" - Scalar multiplication of a vector, b, and number, n, and stored in vector a.\n");
+
+        return 0;
     } else if (!strcmp(token1, "clear")){
         clearVects();
         printf("Vectors cleared.\n");
@@ -100,6 +121,39 @@
                 printVect(v3);
             }
             
+            return 0;
+        } else if (!strcmp(token2, "*")){
+            //dot product
+
+            if (findVect(token1, &v2) < 0){
+                printf("Vector %s not found\n", token1);
+            } else if(findVect(token3, &v3) < 0){
+                printf("Vector %s not found\n", token3);
+            } else {
+                //vector * vector (dot procut)
+                double product = v2.x * v3.x + v2.y * v3.y + v2.z * v3.z;
+                printf("Result of dot product: %.2f\n", product);
+            }
+
+            return 0;
+        } else if (!strcmp(token2, "x") || !strcmp(token2, "X")){
+            //cross product
+
+            if (findVect(token1, &v2) < 0){
+                printf("Vector %s not found\n", token1);
+            } else if(findVect(token3, &v3) < 0){
+                printf("Vector %s not found\n", token3);
+            } else {
+                //vector x vector (cross procut)
+                v1.x = (v2.y * v3.z) - (v2.z * v3.y);
+                v1.y = (v2.z * v3.x) - (v2.x * v3.z);
+                v1.z = (v2.x * v3.y) - (v2.y * v3.x);
+
+                //output to console
+                strcpy(v1.name, "ans");
+                printVect(v1);
+            }
+
             return 0;
         } else if (!strcmp(token2, "=")){
             //must be one of our equation types
@@ -167,7 +221,7 @@
 
                 return 0;
             } else if (!strcmp(token4, "*")){
-                //vector scalar multiplication
+                //vector multiplication
                 //must check both directions
 
                 //input validation
@@ -177,13 +231,13 @@
                 }
 
                 if (findVect(token3, &v2) >= 0 && isNum(token5, &num)){
-                    //vector * number
+                    //vector * number (scalar procut)
                     mul(num, v2, &v1);
                 } else if (isNum(token3, &num) && findVect(token5, &v2) >= 0){
-                    //number * vector
+                    //number * vector (scalar procut)
                     mul(num, v2, &v1);
                 } else {
-                    printf("Invalid multiplication - Must input stored vector and a number.\n");
+                    printf("Invalid multiplication.\n");
                     return 0;
                 }
 
