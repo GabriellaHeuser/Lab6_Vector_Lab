@@ -124,6 +124,10 @@
             return 0;
         } else if (!strcmp(token2, "*")){
             //dot product
+            if (!token3 || token4){
+                printf("Invalid dot product expression.\n");
+                return 0;
+            }
 
             if (findVect(token1, &v2) < 0){
                 printf("Vector %s not found.\n", token1);
@@ -138,6 +142,10 @@
             return 0;
         } else if (!strcmp(token2, "x") || !strcmp(token2, "X")){
             //cross product
+            if (!token3 || token4){
+                printf("Invalid cross product expression.\n");
+                return 0;
+            }
 
             if (findVect(token1, &v2) < 0){
                 printf("Vector %s not found.\n", token1);
@@ -231,10 +239,10 @@
                 }
 
                 if (findVect(token3, &v2) >= 0 && isNum(token5, &num)){
-                    //vector * number (scalar procut)
+                    //vector * number (scalar product)
                     mul(num, v2, &v1);
                 } else if (isNum(token3, &num) && findVect(token5, &v2) >= 0){
-                    //number * vector (scalar procut)
+                    //number * vector (scalar product)
                     mul(num, v2, &v1);
                 } else {
                     printf("Invalid multiplication.\n");
