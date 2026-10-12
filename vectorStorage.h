@@ -7,6 +7,8 @@
  ************************************************************************/
  #ifndef VECTORSTORAGE_H
  #define VECTORSTORAGE_H
+
+ #include "vectorStruct.h"
  
  int  addVect(vect v);
  int  findVect(const char *name, vect *out);

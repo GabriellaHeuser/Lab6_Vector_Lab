@@ -8,9 +8,10 @@
  #include <stdio.h>
  #include <string.h>
  #include <stdlib.h>
+
  #include "minimat.h"
- #include "vectorMath.h"
  #include "vectorStorage.h"
+ #include "vectorMath.h"
  #include "vectorStruct.h"
 
  #define NUMVECTORS 10

@@ -9,9 +9,10 @@
  ************************************************************************/
  #include <stdio.h>
  #include <string.h>
+ 
  #include "minimat.h"
- #include "vectorMath.h"
  #include "vectorStorage.h"
+ #include "vectorMath.h"
  #include "vectorStruct.h"
 
  int main(void){

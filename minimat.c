@@ -11,8 +11,8 @@
  #include <stdlib.h>
 
  #include "minimat.h"
- #include "vectorMath.h"
  #include "vectorStorage.h"
+ #include "vectorMath.h"
  #include "vectorStruct.h"
 
 
@@ -99,16 +99,16 @@
         } else if (!strcmp(token2, "+") || !strcmp(token2, "-")){
             //must be adding or subtracting and reporting
             if (!token3 || token4){
-                printf("Invalid expression");
+                printf("Invalid expression. \n");
                 return 0;
             }
 
             int vect1i = findVect(token1, &v1);
             int vect2i = findVect(token3, &v2);
             if (vect1i < 0){
-                printf("Vector %s not found\n", token1);
+                printf("Vector %s not found.\n", token1);
             } else if (vect2i < 0){
-                printf("Vector %s not found\n", token3);
+                printf("Vector %s not found.\n", token3);
             } else {
                 if (!strcmp(token2, "+")){
                     add(v1, v2, &v3);
@@ -126,9 +126,9 @@
             //dot product
 
             if (findVect(token1, &v2) < 0){
-                printf("Vector %s not found\n", token1);
+                printf("Vector %s not found.\n", token1);
             } else if(findVect(token3, &v3) < 0){
-                printf("Vector %s not found\n", token3);
+                printf("Vector %s not found.\n", token3);
             } else {
                 //vector * vector (dot procut)
                 double product = v2.x * v3.x + v2.y * v3.y + v2.z * v3.z;
@@ -140,9 +140,9 @@
             //cross product
 
             if (findVect(token1, &v2) < 0){
-                printf("Vector %s not found\n", token1);
+                printf("Vector %s not found.\n", token1);
             } else if(findVect(token3, &v3) < 0){
-                printf("Vector %s not found\n", token3);
+                printf("Vector %s not found.\n", token3);
             } else {
                 //vector x vector (cross procut)
                 v1.x = (v2.y * v3.z) - (v2.z * v3.y);
@@ -208,9 +208,9 @@
                 int vect3i = findVect(token5, &v3);
 
                 if (vect2i < 0){
-                    printf("Vector %s not found", token3);
+                    printf("Vector %s not found.\n", token3);
                 } else if (vect3i < 0){
-                    printf("Vector %s not found", token5);
+                    printf("Vector %s not found.\n", token5);
                 } else {
                     sub(v2, v3, &v1);
                     //store in v1 and print
