@@ -10,5 +10,6 @@
 
  int minimat(void);
  int isNum(char* string, double *num);
+ void printHelp();
 
  #endif 

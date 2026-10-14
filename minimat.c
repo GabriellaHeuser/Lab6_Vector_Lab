@@ -53,25 +53,7 @@
         printf("Quitting program...\n");
         return -1;
     } else if (!strcmp(token1, "help")){
-        printf("\nHelp Menu:\n");
-        printf("Accepted commands: \n");
-        printf("\"help\" - Opens menu that describes commands.\n");
-        printf("\"quit\" - Exits the minimat program.\n");
-        printf("\"clear\" - Clears all saved vectors from memory.\n");
-        printf("\"list\" - Prints a list of all saved vectors to the console.\n\n");
-
-        printf("\"a = x y z\" - Assigns x, y, and z values to a vector \"a\" (z may be left blank if 0).\n");
-        printf("              Overwrites previous save of same name.\n");
-        printf("              Will only save if space allows.\n\n");
-
-        printf("\"a\" - Displays current values stored in a.\n");
-        printf("\"a + b\" - Adds vectors a and b and displays result (no storage).\n");
-        printf("\"a * b\" - Performs and reports the dot product of vectors a and b.\n");
-        printf("\"a x b\" - Performs and reports the cross product of vectors a and b.\n\n");
-        
-        printf("\"c = a +/- b\" - Adds/Subtracts two vectors, a and b, and stores the result in c, displays result.\n");
-        printf("\"a = b * n\" or \"a = n * b\" - Scalar multiplication of a vector, b, and number, n, and stored in vector a.\n");
-
+        printHelp();
         return 0;
     } else if (!strcmp(token1, "clear")){
         clearVects();
@@ -123,28 +105,38 @@
             
             return 0;
         } else if (!strcmp(token2, "*")){
-            //dot product
             if (!token3 || token4){
-                printf("Invalid dot product expression.\n");
+                printf("Invalid expression.\n");
                 return 0;
             }
 
-            if (findVect(token1, &v2) < 0){
-                printf("Vector %s not found.\n", token1);
-            } else if(findVect(token3, &v3) < 0){
-                printf("Vector %s not found.\n", token3);
-            } else {
-                //vector * vector (dot procut)
+            if (findVect(token1, &v2) >= 0 && isNum(token3, &num)){
+                //vector * number (scalar product, display only)
+                mul(num, v2, &v3);
+                strcpy(v3.name, "ans");
+                printVect(v3);
+            } else if (isNum(token1, &num) && findVect(token3, &v2) >= 0){
+                //number * vector (scalar product, display only)
+                mul(num, v2, &v3);
+                strcpy(v3.name, "ans");
+                printVect(v3);
+            } else if (findVect(token1, &v2) >= 0 && findVect(token3, &v3) >= 0){
+                //vector * vector (dot product)
                 double product = v2.x * v3.x + v2.y * v3.y + v2.z * v3.z;
                 printf("Result of dot product: %.2f\n", product);
+            } else if (!isNum(token1, &num) && findVect(token1, &v2) < 0){
+                printf("Vector %s not found.\n", token1);
+            } else if (!isNum(token3, &num) && findVect(token3, &v3) < 0){
+                printf("Vector %s not found.\n", token3);
+            } else {
+                printf("Invalid expression.\n");
             }
-
             return 0;
-        } else if (!strcmp(token2, "x") || !strcmp(token2, "X")){
+    } else if (!strcmp(token2, "x") || !strcmp(token2, "X")){
             //cross product
             if (!token3 || token4){
                 printf("Invalid cross product expression.\n");
-                return 0;
+                return 0; 
             }
 
             if (findVect(token1, &v2) < 0){
@@ -295,3 +287,24 @@
     *num = strtod(string, &end);
     return (end != string && *end == '\0');
  }
+
+  void printHelp(){
+    printf("\nHelp Menu:\n");
+    printf("Accepted commands: \n");
+    printf("\"help\" - Opens menu that describes commands.\n");
+    printf("\"quit\" - Exits the minimat program.\n");
+    printf("\"clear\" - Clears all saved vectors from memory.\n");
+    printf("\"list\" - Prints a list of all saved vectors to the console.\n\n");
+
+    printf("\"a = x y z\" - Assigns x, y, and z values to a vector \"a\" (z may be left blank if 0).\n");
+    printf("              Overwrites previous save of same name.\n");
+    printf("              Will only save if space allows.\n\n");
+
+    printf("\"a\" - Displays current values stored in a.\n");
+    printf("\"a + b\" - Adds vectors a and b and displays result (no storage).\n");
+    printf("\"a * b\" - Performs and reports the dot product of vectors a and b.\n");
+    printf("\"a x b\" - Performs and reports the cross product of vectors a and b.\n\n");
+   
+    printf("\"c = a +/- b\" - Adds/Subtracts two vectors, a and b, and stores the result in c, displays result.\n");
+    printf("\"a = b * n\" or \"a = n * b\" - Scalar multiplication of a vector, b, and number, n, and stored in vector a.\n");
+  }

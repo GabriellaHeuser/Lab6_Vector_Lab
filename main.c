@@ -15,7 +15,13 @@
  #include "vectorMath.h"
  #include "vectorStruct.h"
 
- int main(void){
+ int main(int argc, char *argv[]){
+   if (argc > 1 && !strcmp(argv[1], "-h")){
+         printHelp();
+         return 0;
+       }
+
+
    printf("Welcome to minimat!\n");
    printf("Type \"help\" for a list of valid commands.\n");
    printf("Type \"quit\" to quit program.\n");
