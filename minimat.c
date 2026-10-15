@@ -51,6 +51,7 @@
 
     if(!strcmp(token1, "quit")){
         printf("Quitting program...\n");
+        clearVects();
         return -1;
     } else if (!strcmp(token1, "help")){
         printHelp();
@@ -62,6 +63,30 @@
     } else if (!strcmp(token1, "list")){
         printf("List of vectors:\n");
         listVects();
+        return 0;
+    } else if (!strcmp(token1, "load")){
+        token2 = strtok(NULL, " \n");
+        token3 = strtok(NULL, " \n");
+
+        if(!token2 || token3){
+            printf("Invalid expression. \n");
+            return 0;
+        }
+
+        printf("Loading file %s...\n", token2);
+        load(token2);
+        return 0;
+    } else if (!strcmp(token1, "save")){
+        token2 = strtok(NULL, " \n");
+        token3 = strtok(NULL, " \n");
+        
+        if(!token2 || token3){
+            printf("Invalid expression. \n");
+            return 0;
+        }
+
+        printf("Saving file %s...\n", token2);
+        save(token2);
         return 0;
     } else{
         token2 = strtok(NULL, " \n");

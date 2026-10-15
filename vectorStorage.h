@@ -17,5 +17,9 @@
  void printVectByIndex(int index);
  void printVect(vect v);
 
+ int load(char *filename);
+ int save(char *filename);
+ void freeVects(void);
+
  #endif
  
