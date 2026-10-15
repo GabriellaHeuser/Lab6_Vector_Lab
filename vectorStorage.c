@@ -107,6 +107,11 @@ void printVect(vect v){
 }
 
 int load(char *filename){
+   if (!isCSV(filename)){
+      printf("Must enter .csv file. \n");
+      return 1;
+   }
+
    FILE *fd = fopen(filename, "r");
    if (fd == NULL){
       printf("File \"%s\" not found. \n", filename);
@@ -151,6 +156,11 @@ int load(char *filename){
 
 
 int save(char *filename){
+   if (!isCSV(filename)){
+      printf("Must enter .csv file. \n");
+      return 1;
+   }
+
    FILE *fd = fopen(filename, "w");
    if (fd == NULL){
       printf("Error opening file. \n");
@@ -158,9 +168,20 @@ int save(char *filename){
    }
 
    for (int i = 0; i < numVectors; i++){
-      fprintf(fd, "%s,%f,%f,%f\n", vectors[i].name, vectors[i].x, vectors[i].y, vectors[i].z);
+      if (vectors[i].name[0] != '\0'){
+         fprintf(fd, "%s,%f,%f,%f\n", vectors[i].name, vectors[i].x, vectors[i].y, vectors[i].z);
+      }
    }
 
    fclose(fd);
    return 0;
+}
+
+int isCSV(char *filename){
+   if (strlen(filename) < 4){
+      return 0;
+   }
+
+   return !strcmp(filename + strlen(filename) - 4, ".csv");
+
 }

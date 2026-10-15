@@ -20,6 +20,7 @@
  int load(char *filename);
  int save(char *filename);
  void freeVects(void);
+ int isCSV(char *filename);
 
  #endif
  

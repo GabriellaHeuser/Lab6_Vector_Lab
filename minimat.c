@@ -73,8 +73,9 @@
             return 0;
         }
 
-        printf("Loading file %s...\n", token2);
-        load(token2);
+        if (load(token2)==0){
+            printf("File \"%s\" loaded. \n", token2);   
+        }
         return 0;
     } else if (!strcmp(token1, "save")){
         token2 = strtok(NULL, " \n");
@@ -85,8 +86,10 @@
             return 0;
         }
 
-        printf("Saving file %s...\n", token2);
-        save(token2);
+        
+        if (save(token2) == 0){
+            printf("File \"%s\" saved. \n", token2);
+        } 
         return 0;
     } else{
         token2 = strtok(NULL, " \n");
