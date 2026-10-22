@@ -1,4 +1,4 @@
-# Vector Lab - Gabi
+# Vector Lab Branch - Gabi
 
 ## Description
 This program lets you store vectors and perform operations on them.
